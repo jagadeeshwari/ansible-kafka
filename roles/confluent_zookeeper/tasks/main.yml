@@ -31,7 +31,7 @@
     recurse: true
  
  - name: Create Log Directory
-  file:
+   file:
     path: "{{zookeeper.log_path}}"
     state: directory
     group: "{{zookeeper_group}}"
@@ -39,12 +39,12 @@
     mode: 0750
   
  - name: Zookeeper Service Started
-  systemd:
+   systemd:
     name: "{{zookeeper_service_name}}"
     enabled: true
     state: started
  - name: Create Service Override Directory
-  file:
+   file:
     path: "{{zookeeper.systemd_override | dirname}}"
     owner: "{{zookeeper_user}}"
     group: "{{zookeeper_group}}"
