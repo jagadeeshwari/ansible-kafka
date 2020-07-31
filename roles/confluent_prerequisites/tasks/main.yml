@@ -23,7 +23,6 @@
   yum:
     name: "{{redhat_java_package_name}}"
     state: present
-  when: install_java|bool
 
 - name: Install OpenSSL
   yum:
