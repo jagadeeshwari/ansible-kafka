@@ -1,6 +1,5 @@
 - name: Host Prerequisites
-  hosts: zookeeper:kafka_broker
-  tags: common
+  hosts: zookeeper
   tasks:
   - import_role:
       name: confluent_prerequisites
