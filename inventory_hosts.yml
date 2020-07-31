@@ -8,13 +8,14 @@ all:
  #### Confluent Server vs Confluent Kafka ####
     ## Confluent Server will be installed by default, to install confluent-kafka instead, uncomment the below
     confluent_server_enabled: false
-zookeeper:
+  zookeeper:
+    hosts:
+     ip-172-31-37-173.us-east-2.compute.internal:
   ## To configure Zookeeper to run as a custom user, uncomment below
-  # vars:
-     zookeeper_user: custom-user
-     zookeeper_group: custom-group
-  hosts:
-    ip-172-31-37-173.us-east-2.compute.internal:
+    vars:
+      zookeeper_user: custom-user
+      zookeeper_group: custom-group
+  
       ## By default the first host will get zookeeper id=1, second gets id=2. Set zookeeper_id to customize
       # zookeeper_id: 2
 
@@ -26,9 +27,11 @@ zookeeper:
     #ip-172-31-34-231.us-east-2.compute.internal:
       # zookeeper_id: 1
 
-kafka_broker:
+  kafka_broker:
+    hosts:
+     ip-172-31-37-173.us-east-2.compute.internal:
   ## To apply variables specifically to the hosts within kafka_broker group, you can add a vars block like below
-  vars:
+    vars:
   #   ## To configure Kafka to run as a custom user, uncomment below
      kafka_broker_user: custom-user
      kafka_broker_group: custom-group
@@ -37,5 +40,4 @@ kafka_broker:
      kafka_broker:
        datadir:
          - /var/lib/kafka/my-data
-  hosts:
-    ip-172-31-37-173.us-east-2.compute.internal:
+  
