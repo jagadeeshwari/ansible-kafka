@@ -14,7 +14,7 @@ zookeeper:
      zookeeper_user: custom-user
      zookeeper_group: custom-group
   hosts:
-    ip-172-31-16-127.us-east-2.compute.internal:
+    ip-172-31-43-93.us-east-2.compute.internal:
       ## By default the first host will get zookeeper id=1, second gets id=2. Set zookeeper_id to customize
       # zookeeper_id: 2
 
@@ -38,4 +38,4 @@ kafka_broker:
        datadir:
          - /var/lib/kafka/my-data
   hosts:
-    ip-172-31-16-127.us-east-2.compute.internal:
+    ip-172-31-43-93.us-east-2.compute.internal:
