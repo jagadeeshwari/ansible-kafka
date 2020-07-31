@@ -1,5 +1,6 @@
 ---
 all:
+ children:
   zookeeper:
     hosts:
      ip-172-31-37-173.us-east-2.compute.internal:
