@@ -40,4 +40,4 @@
   hosts: control_center
   tasks:
   - import_role:
-      name: confluent.control_center
+      name: confluent_control_center
