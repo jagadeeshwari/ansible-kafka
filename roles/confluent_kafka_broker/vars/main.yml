@@ -1,0 +1,57 @@
+---
+confluent_repo_version: 5.5
+confluent_package_version: 5.5.1
+confluent_full_package_version: "{{ confluent_package_version + '-1' }}"
+confluent_package_redhat_suffix: "{{ '-' + confluent_full_package_version if confluent_full_package_version != '' else ''}}"
+confluent_package_debian_suffix: "{{ '=' + confluent_full_package_version if confluent_full_package_version != '' else ''}}"
+kafka_broker_service_name: "{{ 'confluent-server' if confluent_server_enabled|bool else 'confluent-kafka'}}"
+kafka_broker_main_package: "{{ 'confluent-server' if confluent_server_enabled|bool else 'confluent-kafka-2.12'}}"
+kafka_broker_packages:
+  - confluent-common
+  - confluent-rest-utils
+  - confluent-metadata-service
+  - "{{ kafka_broker_main_package }}"
+  - confluent-rebalancer
+  - confluent-security
+kafka_broker_default_user: cp-kafka
+kafka_broker_default_group: confluent
+kafka_broker:
+  config_file: /etc/kafka/server.properties
+  systemd_file: /usr/lib/systemd/system/{{kafka_broker_service_name}}.service
+  systemd_override: /etc/systemd/system/{{kafka_broker_service_name}}.service.d/override.conf
+  appender_log_path: /var/log/kafka/
+  kafka_appender_log_name: server.log
+  kafka_appender_max_log_files: 10
+  kafka_appender_log_file_size: 100MB
+  state_change_appender_log_name: state-change.log
+  state_change_appender_max_log_files: 10
+  state_change_appender_log_file_size: 100MB
+  request_appender_log_name: kafka-request.log
+  request_appender_max_log_files: 10
+  request_appender_log_file_size: 100MB
+  cleaner_appender_log_name: log-cleaner.log
+  cleaner_appender_max_log_files: 10
+  cleaner_appender_log_file_size: 100MB
+  controller_appender_log_name: controller.log
+  controller_appender_max_log_files: 10
+  controller_appender_log_file_size: 100MB
+  authorizer_appender_log_name: kafka-authorizer.log
+  authorizer_appender_max_log_files: 10
+  authorizer_appender_log_file_size: 100MB
+  metadata_appender_log_name: metadata.log
+  metadata_appender_max_log_files: 10
+  metadata_appender_log_file_size: 100mb
+  log4j_file: /etc/kafka/kafka_server_log4j.properties
+  jaas_file: /etc/kafka/kafka_server_jaas.conf
+  datadir:
+    - /var/lib/kafka/data
+kafka_broker_user: "{{kafka_broker_default_user}}"
+kafka_broker_group: "{{kafka_broker_default_group}}"
+kafka_broker_truststore_path: "/var/ssl/private/kafka_broker.truststore.jks"
+kafka_broker_keystore_path: "/var/ssl/private/kafka_broker.keystore.jks"
+kafka_broker_truststore_storepass: "{{ ssl_truststore_password if ssl_provided_keystore_and_truststore|bool else 'confluenttruststorepass'}}"
+kafka_broker_keystore_storepass: "{{ ssl_keystore_store_password if ssl_provided_keystore_and_truststore|bool else 'confluentkeystorestorepass'}}"
+kafka_broker_keystore_keypass: "{{ ssl_keystore_key_password if ssl_provided_keystore_and_truststore|bool else kafka_broker_keystore_storepass }}"
+kafka_broker_ca_cert_path: "/var/ssl/private/ca.crt"
+kafka_broker_cert_path: "/var/ssl/private/kafka_broker.crt"
+kafka_broker_key_path: "/var/ssl/private/kafka_broker.key"
