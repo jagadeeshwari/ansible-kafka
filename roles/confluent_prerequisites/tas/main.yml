@@ -1,0 +1,33 @@
+- name: Add Confluent Dist Yum Repo
+  yum_repository:
+    name: Confluent.dist
+    file: confluent
+    description: "Confluent repository (dist)"
+    baseurl: "{{confluent_common_repository_redhat_dist_baseurl}}"
+    gpgcheck: "{{confluent_common_repository_redhat_dist_gpgcheck}}"
+    gpgkey: "{{confluent_common_repository_redhat_dist_gpgkey}}"
+    enabled: "{{confluent_common_repository_redhat_dist_enabled}}"
+   
+- name: Add Confluent Yum Repo
+  yum_repository:
+    name: Confluent
+    file: confluent
+    description: "Confluent repository"
+    baseurl: "{{confluent_common_repository_redhat_main_baseurl}}"
+    gpgcheck: "{{confluent_common_repository_redhat_main_gpgcheck}}"
+    gpgkey: "{{confluent_common_repository_redhat_main_gpgkey}}"
+    enabled: "{{confluent_common_repository_redhat_main_enabled}}"
+  when: not custom_yum_repofile|bool
+  
+  - name: Install Java
+  yum:
+    name: "{{redhat_java_package_name}}"
+    state: present
+  when: install_java|bool
+
+- name: Install OpenSSL
+  yum:
+    name: "{{item}}"
+  loop:
+    - openssl
+    - unzip
