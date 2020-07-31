@@ -18,8 +18,8 @@
     gpgkey: "{{confluent_common_repository_redhat_main_gpgkey}}"
     enabled: "{{confluent_common_repository_redhat_main_enabled}}"
   when: not custom_yum_repofile|bool
-  
-  - name: Install Java
+
+- name: Install Java
   yum:
     name: "{{redhat_java_package_name}}"
     state: present
