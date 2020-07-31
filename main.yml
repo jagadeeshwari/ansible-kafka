@@ -17,3 +17,27 @@
   tasks:
   - import_role:
       name: confluent_kafka_broker
+
+- name: Schema Registry Provisioning
+  hosts: schema_registry
+  tasks:
+  - import_role:
+      name: confluent_schema_registry
+
+- name: Kafta Connect Provisioning
+  hosts: kafka_connect
+  tasks:
+  - import_role:
+      name: confluent_kafka_connect
+      
+- name: Kafka Rest Provisioning
+  hosts: kafka_rest
+  tasks:
+  - import_role:
+      name: confluent_kafka_rest
+      
+- name: Control Center Provisioning
+  hosts: control_center
+  tasks:
+  - import_role:
+      name: confluent.control_center
