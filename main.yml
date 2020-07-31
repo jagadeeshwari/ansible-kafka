@@ -1,0 +1,20 @@
+- name: Host Prerequisites
+  hosts: zookeeper:kafka_broker
+  tags: common
+  tasks:
+  - import_role:
+      name: confluent_prerequisite
+
+- name: Zookeeper Provisioning
+  hosts: zookeeper
+  tags: zookeeper
+  tasks:
+  - import_role:
+      name: confluent_zookeeper
+
+- name: Kafka Broker Provisioning
+  hosts: kafka_broker
+  tags: kafka_broker
+  tasks:
+  - import_role:
+      name: confluent_kafka_broker
