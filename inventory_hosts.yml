@@ -1,0 +1,41 @@
+---
+all:
+  vars:
+    ansible_connection: ssh
+    ansible_user: ec2-user
+    ansible_become: true
+    ansible_ssh_private_key_file: /tmp/certs/ssh_priv.pem
+ #### Confluent Server vs Confluent Kafka ####
+    ## Confluent Server will be installed by default, to install confluent-kafka instead, uncomment the below
+    confluent_server_enabled: false
+zookeeper:
+  ## To configure Zookeeper to run as a custom user, uncomment below
+  # vars:
+     zookeeper_user: custom-user
+     zookeeper_group: custom-group
+  hosts:
+    ip-172-31-16-127.us-east-2.compute.internal:
+      ## By default the first host will get zookeeper id=1, second gets id=2. Set zookeeper_id to customize
+      # zookeeper_id: 2
+
+      ## For kerberos sasl protocol, EACH host will need these two variables:
+      # zookeeper_kerberos_keytab_path: <The path on ansible host to keytab file, eg. /tmp/keytabs/zookeeper-ip-172-31-34-246.us-east-2.compute.internal.keytab>
+      # zookeeper_kerberos_principal: <The principal configured in kdc server, eg. zookeeper/ip-172-31-34-246.us-east-2.compute.internal@REALM.EXAMPLE.COM>
+    #ip-172-31-37-15.us-east-2.compute.internal:
+      # zookeeper_id: 3
+    #ip-172-31-34-231.us-east-2.compute.internal:
+      # zookeeper_id: 1
+
+kafka_broker:
+  ## To apply variables specifically to the hosts within kafka_broker group, you can add a vars block like below
+  vars:
+  #   ## To configure Kafka to run as a custom user, uncomment below
+     kafka_broker_user: custom-user
+     kafka_broker_group: custom-group
+  #   # To update the log.dirs property within the kafka server.properties, uncomment below
+  #   # By default the log directory is /var/lib/kafka/data
+     kafka_broker:
+       datadir:
+         - /var/lib/kafka/my-data
+  hosts:
+    ip-172-31-16-127.us-east-2.compute.internal:
