@@ -1,6 +1,3 @@
-vars:
-  ansible_become: true
-  
 - name: Add Confluent Dist Yum Repo
   yum_repository:
     name: Confluent.dist
