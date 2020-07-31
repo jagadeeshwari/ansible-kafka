@@ -1,9 +1,11 @@
 ---
+confluent_repo_version: 5.5
+confluent_package_version: 5.5.1
+confluent_full_package_version: "{{ confluent_package_version + '-1' }}"
+confluent_package_redhat_suffix: "{{ '-' + confluent_full_package_version if confluent_full_package_version != '' else ''}}"
+kafka_broker_service_name: "{{ 'confluent-server' if confluent_server_enabled|bool else 'confluent-kafka'}}"
+kafka_broker_main_package: "{{ 'confluent-server' if confluent_server_enabled|bool else 'confluent-kafka-2.12'}}"
 confluent_common_repository_baseurl: "https://packages.confluent.io"
-
-confluent_common_repository_debian_baseurl: "{{confluent_common_repository_baseurl}}/deb"
-confluent_common_repository_debian_key_url: "{{confluent_common_repository_debian_baseurl}}/{{confluent_repo_version}}/archive.key"
-confluent_common_repository_debian_repository: "deb [arch=amd64] {{confluent_common_repository_debian_baseurl}}/{{confluent_repo_version}} stable main"
 
 confluent_common_repository_redhat_baseurl: "{{confluent_common_repository_baseurl}}/rpm"
 confluent_common_repository_redhat_main_baseurl: "{{confluent_common_repository_redhat_baseurl}}/{{confluent_repo_version}}"
@@ -18,10 +20,6 @@ confluent_common_repository_redhat_dist_enabled: 1
 
 install_java: true
 redhat_java_package_name: java-1.8.0-openjdk
-debian_java_package_name: openjdk-8-jdk
-ubuntu_java_package_name: openjdk-8-jdk
-ubuntu_java_repository: ppa:openjdk-r/ppa
-
 jolokia_version: 1.6.2
 jolokia_jar_url: "http://search.maven.org/remotecontent?filepath=org/jolokia/jolokia-jvm/{{jolokia_version}}/jolokia-jvm-{{jolokia_version}}-agent.jar"
 
