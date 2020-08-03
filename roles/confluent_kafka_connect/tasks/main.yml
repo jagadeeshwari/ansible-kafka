@@ -19,7 +19,7 @@
     group: "{{kafka_connect_group}}"
     
 - name: Start Connect Service
-   systemd:
+  systemd:
     name: "{{kafka_connect_service_name}}"
     enabled: true
     state: started
