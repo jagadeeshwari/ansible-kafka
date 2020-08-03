@@ -17,5 +17,13 @@
   tasks:
   - import_role:
       name: confluent_kafka_broker
+ 
+- name: Kafta Connect Provisioning
+  hosts: kafka_connect
+  tags: kafka_connect
+  tasks:
+  - import_role:
+      name: confluent_kafka_connect
+
 
 
