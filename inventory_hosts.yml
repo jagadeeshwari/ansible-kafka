@@ -4,6 +4,7 @@ all:
   zookeeper:
     hosts:
      ip-172-31-28-237.us-east-2.compute.internal:
+     ip-172-31-39-42.us-east-2.compute.internal:
     vars:
       ansible_connection: ssh
       ansible_user: ec2-user
@@ -14,6 +15,16 @@ all:
   kafka_broker:
      hosts:
       ip-172-31-28-237.us-east-2.compute.internal:
+      kafka_broker:
+        properties:
+           broker.rack: us-east-1d
+           replica.selector.class: org.apache.kafka.common.replica.RackAwareReplicaSelector
+           
+      ip-172-31-39-42.us-east-2.compute.internal:
+      kafka_broker:
+        properties:
+           broker.rack: us-east-1a
+           replica.selector.class: org.apache.kafka.common.replica.RackAwareReplicaSelector
      vars:
       ansible_connection: ssh
       ansible_user: ec2-user
