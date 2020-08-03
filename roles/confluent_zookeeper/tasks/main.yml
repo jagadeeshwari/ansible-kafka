@@ -46,15 +46,6 @@
     state: directory
     mode: 0640
     
-- name: Create Zookeeper Config
-  template:
-    src: zookeeper.properties.j2
-    dest: "{{zookeeper.config_file}}"
-    mode: 0400
-    owner: "{{zookeeper_user}}"
-    group: "{{zookeeper_group}}"
-  register: zookeeper_config
-    
 - name: Zookeeper Service Started
   systemd:
     name: "{{zookeeper_service_name}}"
