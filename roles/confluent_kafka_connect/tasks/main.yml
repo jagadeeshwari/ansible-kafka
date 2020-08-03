@@ -18,7 +18,7 @@
     system: true
     group: "{{kafka_connect_group}}"
     
- - name: Start Connect Service
+- name: Start Connect Service
    systemd:
     name: "{{kafka_connect_service_name}}"
     enabled: true
