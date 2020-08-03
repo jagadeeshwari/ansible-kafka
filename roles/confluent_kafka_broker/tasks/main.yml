@@ -50,5 +50,5 @@
     owner: "{{kafka_broker_user}}"
     mode: 0750
     
- - name: Restart Kafka
-   include_tasks: tasks/restart.yml
+- name: Restart Kafka
+  include_tasks: tasks/restart.yml
