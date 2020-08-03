@@ -1,0 +1,21 @@
+---
+- name: Uninstall the Zookeeper Packages
+  yum:
+    name: "{{item}}{{confluent_package_redhat_suffix}}"
+    state: absent
+  loop: "{{zookeeper_packages}}"
+  
+- name: Uninstall the Kafka Broker Packages
+  yum:
+    name: "{{item}}{{confluent_package_redhat_suffix}}"
+    state: absent
+  loop: "{{kafka_broker_packages}}"
+  when: ansible_os_family == "RedHat"
+
+- name: Uninstall the Kafka Connect Packages
+  yum:
+    name: "{{item}}{{confluent_package_redhat_suffix}}"
+    state: absent
+  loop: "{{kafka_connect_packages}}"
+  when: ansible_os_family == "RedHat"
+  

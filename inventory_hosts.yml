@@ -24,7 +24,16 @@ all:
       kafka_broker:
        datadir:
          - /var/lib/kafka/my-data
-
+  kafka_connect:
+     hosts:
+      ip-172-31-28-237.us-east-2.compute.internal:
+     vars:
+      ansible_connection: ssh
+      ansible_user: ec2-user
+      ansible_become: true
+      confluent_server_enabled: false
+      kafka_connect_user: custom-user
+      kafka_connect_group: custom-group
    
   
  

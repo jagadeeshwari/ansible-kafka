@@ -1,0 +1,6 @@
+- name: uninstalling Zookeeper,Kafka brokerand kafka connect
+  hosts: zookeeper:kafka_broker:kafka_connect
+  tasks:
+  - import_role:
+      name: uninstall_kafka_services
+

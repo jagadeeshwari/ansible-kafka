@@ -1,0 +1,31 @@
+---
+confluent_repo_version: 5.5
+confluent_package_version: 5.5.1
+confluent_full_package_version: "{{ confluent_package_version + '-1' }}"
+confluent_package_redhat_suffix: "{{ '-' + confluent_full_package_version if confluent_full_package_version != '' else ''}}"
+confluent_package_debian_suffix: "{{ '=' + confluent_full_package_version if confluent_full_package_version != '' else ''}}"
+
+kafka_broker_main_package: confluent-kafka-2.12
+kafka_connect_service_name: confluent-kafka-connect
+kafka_connect_packages:
+  - confluent-common
+  - confluent-rest-utils
+  - confluent-metadata-service
+  - "{{ kafka_broker_main_package }}"
+  - confluent-kafka-connect-storage-common
+  - confluent-kafka-connect-s3
+  - confluent-kafka-connect-elasticsearch
+  - confluent-kafka-connect-jdbc
+  - confluent-kafka-connect-jms
+  - confluent-kafka-connect-replicator
+  - confluent-security
+  - confluent-rebalancer
+  - confluent-control-center-fe
+  - confluent-control-center
+  - confluent-schema-registry
+kafka_connect_default_user: cp-kafka-connect
+kafka_connect_default_group: confluent
+kafka_connect:
+  config_file: /etc/kafka/connect-distributed.properties
+  systemd_file: /usr/lib/systemd/system/{{kafka_connect_service_name}}.service
+  systemd_override: /etc/systemd/system/{{kafka_connect_service_name}}.service.d/override.conf
