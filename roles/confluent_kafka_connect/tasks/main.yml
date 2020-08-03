@@ -1,0 +1,25 @@
+---
+- name: Install the Kafka Connect Packages
+  yum:
+    name: "{{item}}{{confluent_package_redhat_suffix}}"
+    state: latest
+  loop: "{{kafka_connect_packages}}"
+  when: ansible_os_family == "RedHat"
+  
+ # Configure environment
+- name: Create Connect Distributed Group
+  group:
+    name: "{{kafka_connect_group}}"
+
+- name: Create Connect Distributed User
+  user:
+    name: "{{kafka_connect_user}}"
+    comment: "Connect Distributed User"
+    system: true
+    group: "{{kafka_connect_group}}"
+    
+ - name: Start Connect Service
+   systemd:
+    name: "{{kafka_connect_service_name}}"
+    enabled: true
+    state: started
