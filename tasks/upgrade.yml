@@ -23,27 +23,12 @@
     name: "{{ service_name }}"
     state: stopped
 
-- name: Configure Repositories
-  import_role:
-    name: confluent.common
-  vars:
-    install_java: false
-
 - name: Install the Packages - Red Hat
   yum:
     name: "{{item}}{{confluent_package_redhat_suffix}}"
     state: latest
   loop: "{{ packages }}"
   when: ansible_os_family == "RedHat"
-  # Packages will not be found in check mode because repos not changed
-  ignore_errors: "{{ ansible_check_mode }}"
-
-- name: Install the Packages - Debian
-  apt:
-    name: "{{item}}{{confluent_package_debian_suffix}}"
-    update_cache: true
-  loop: "{{ packages }}"
-  when: ansible_os_family == "Debian"
   # Packages will not be found in check mode because repos not changed
   ignore_errors: "{{ ansible_check_mode }}"
 
