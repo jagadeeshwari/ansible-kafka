@@ -1,3 +1,4 @@
 - name: Upgrade Kafka Broker
+  hosts: kafka_broker
       import_role: upgrade_broker_component
      
