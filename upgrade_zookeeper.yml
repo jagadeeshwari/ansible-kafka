@@ -1,0 +1,3 @@
+- name: Upgrade Kafka Broker
+  hosts: zookeeper
+      import_role: upgrade_zookeeper_component
