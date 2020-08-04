@@ -24,4 +24,22 @@ kafka_broker:
   appender_log_path: /var/log/kafka/  
   datadir:
     - /var/lib/kafka/data
+  config_file: /etc/kafka/server.properties
+  systemd_file: /usr/lib/systemd/system/{{kafka_broker_service_name}}.service
+  systemd_override: /etc/systemd/system/{{kafka_broker_service_name}}.service.d/override.conf
+  
+zookeeper:
+  config_file: /etc/kafka/zookeeper.properties
+  systemd_file: /usr/lib/systemd/system/{{zookeeper_service_name}}.service
+  systemd_override: /etc/systemd/system/{{zookeeper_service_name}}.service.d/override.conf
+
+service_name: "{{ kafka_broker_service_name }}"
+packages: "{{ kafka_broker_packages }}"
+backup_files:
+ - "{{ kafka_broker.config_file }}"
+ - "{{ kafka_broker.systemd_override }}"
+ - "{{ zookeeper.config_file }}"
+restore_files:
+ - "{{ kafka_broker.config_file }}"
+ - "{{ zookeeper.config_file }}"
 
