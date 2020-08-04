@@ -1,0 +1,28 @@
+---
+confluent_repo_version: 5.5
+confluent_package_version: 5.5.1
+confluent_full_package_version: "{{ confluent_package_version + '-1' }}"
+confluent_package_redhat_suffix: "{{ '-' + confluent_full_package_version if confluent_full_package_version != '' else ''}}"
+confluent_package_debian_suffix: "{{ '=' + confluent_full_package_version if confluent_full_package_version != '' else ''}}"
+
+zookeeper_default_user: cp-kafka
+zookeeper_default_group: confluent
+zookeeper_user: "{{zookeeper_default_user}}"
+zookeeper_group: "{{zookeeper_default_group}}"
+
+zookeeper_service_name: confluent-zookeeper
+zookeeper_main_package: confluent-kafka-2.12
+zookeeper_packages:
+  - confluent-common
+  - confluent-rest-utils
+  - confluent-metadata-service
+  - "{{ zookeeper_main_package }}"
+
+zookeeper:
+  log_path: /var/log/kafka/
+  systemd_override: /etc/systemd/system/{{zookeeper_service_name}}.service.d/override.conf
+  properties:
+    dataDir: /var/lib/zookeeper
+  config_file: /etc/kafka/zookeeper.properties
+  systemd_file: /usr/lib/systemd/system/{{zookeeper_service_name}}.service
+  systemd_override: /etc/systemd/system/{{zookeeper_service_name}}.service.d/override.conf
