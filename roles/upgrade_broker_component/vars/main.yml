@@ -1,0 +1,44 @@
+---
+confluent_repo_version: 5.5
+confluent_package_version: 5.5.1
+confluent_full_package_version: "{{ confluent_package_version + '-1' }}"
+confluent_package_redhat_suffix: "{{ '-' + confluent_full_package_version if confluent_full_package_version != '' else ''}}"
+confluent_package_debian_suffix: "{{ '=' + confluent_full_package_version if confluent_full_package_version != '' else ''}}"
+
+kafka_broker_service_name: confluent-kafka
+kafka_broker_main_package: confluent-kafka-2.12
+kafka_broker_packages:
+  - confluent-common
+  - confluent-rest-utils
+  - confluent-metadata-service
+  - "{{ kafka_broker_main_package }}"
+  - confluent-rebalancer
+  - confluent-security
+  
+kafka_broker_default_user: cp-kafka
+kafka_broker_default_group: confluent
+kafka_broker_user: "{{kafka_broker_default_user}}"
+kafka_broker_group: "{{kafka_broker_default_group}}"
+
+kafka_broker:
+  appender_log_path: /var/log/kafka/  
+  datadir:
+    - /var/lib/kafka/data
+  config_file: /etc/kafka/server.properties
+  systemd_file: /usr/lib/systemd/system/{{kafka_broker_service_name}}.service
+  systemd_override: /etc/systemd/system/{{kafka_broker_service_name}}.service.d/override.conf
+  
+zookeeper:
+  config_file: /etc/kafka/zookeeper.properties
+  systemd_file: /usr/lib/systemd/system/{{zookeeper_service_name}}.service
+  systemd_override: /etc/systemd/system/{{zookeeper_service_name}}.service.d/override.conf
+
+service_name: "{{ kafka_broker_service_name }}"
+packages: "{{ kafka_broker_packages }}"
+backup_files:
+ - "{{ kafka_broker.config_file }}"
+ - "{{ kafka_broker.systemd_override }}"
+ - "{{ zookeeper.config_file }}"
+restore_files:
+ - "{{ kafka_broker.config_file }}"
+ - "{{ zookeeper.config_file }}"
