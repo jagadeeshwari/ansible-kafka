@@ -29,7 +29,7 @@ all:
       ip-172-31-18-93.us-east-2.compute.internal:
      vars:
       ansible_connection: ssh
-      #ansible_user: ec2-user
+      ansible_user: ec2-user
       ansible_become: true
       confluent_server_enabled: false
       kafka_connect_user: custom-user
