@@ -1,0 +1,8 @@
+- name: Kafka deployment
+  hosts: kafka_broker
+  tasks:
+  - import_role:
+      name: kafka_deployment
+      
+- name: Restart Kafka
+  include_tasks: tasks/restart.yml
