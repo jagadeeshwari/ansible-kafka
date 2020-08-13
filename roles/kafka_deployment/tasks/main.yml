@@ -1,0 +1,14 @@
+---
+- name: Download artifacts from JFROG
+  vars:
+    artifact_path:
+    artifact:
+    version:
+    dest_path:
+  tasks:
+    - name: Deployment
+      get_url: 
+        url: {{artifact_path}}/{{version}}/{{artifact}}
+        dest: {{dest_path}}
+        username: {{jfrog_username}}
+        password: {{jfrog_password}}
