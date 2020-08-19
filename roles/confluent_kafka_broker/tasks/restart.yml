@@ -5,4 +5,4 @@
     name: "{{kafka_broker_service_name}}"
     state: restarted
     delegate_to: "{{ item }}"
-    loop: "{{ groups['kafka_broker'] }}"
+    loop: "{{ kafka_broker }}"
