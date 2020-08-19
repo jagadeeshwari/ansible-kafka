@@ -3,7 +3,8 @@ all:
  children:
   zookeeper:
     hosts:
-     ip-172-31-18-93.us-east-2.compute.internal:
+     ip-172-31-28-209.us-east-2.compute.internal:
+     ip-172-31-41-61.us-east-2.compute.internal:
     vars:
       ansible_connection: ssh
       ansible_user: ec2-user
@@ -13,7 +14,8 @@ all:
       zookeeper_group: custom-group
   kafka_broker:
      hosts:
-      ip-172-31-18-93.us-east-2.compute.internal:
+      ip-172-31-28-209.us-east-2.compute.internal:
+      ip-172-31-41-61.us-east-2.compute.internal:
      vars:
       ansible_connection: ssh
       ansible_user: ec2-user
@@ -26,7 +28,8 @@ all:
          - /var/lib/kafka/my-data
   kafka_connect:
      hosts:
-      ip-172-31-18-93.us-east-2.compute.internal:
+      ip-172-31-28-209.us-east-2.compute.internal:
+      ip-172-31-41-61.us-east-2.compute.internal:
      vars:
       ansible_connection: ssh
       ansible_user: ec2-user
