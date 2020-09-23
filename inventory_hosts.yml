@@ -1,5 +1,11 @@
 ---
 all:
+ vars:
+    #### TLS Configuration ####
+    ## By default, data will NOT be encrypted. To turn on TLS encryption, uncomment this line
+    ssl_enabled: false
+       ## For SASL/PLAIN uncomment this line:
+    sasl_protocol: plain
  children:
   zookeeper:
     hosts:
