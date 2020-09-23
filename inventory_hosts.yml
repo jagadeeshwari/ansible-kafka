@@ -18,6 +18,8 @@ all:
       confluent_server_enabled: false
       zookeeper_user: custom-user
       zookeeper_group: custom-group
+      ssl_enabled: false
+      sasl_protocol: plain
   kafka_broker:
      hosts:
       ip-172-31-38-8.us-east-2.compute.internal:
@@ -29,6 +31,8 @@ all:
       confluent_server_enabled: false
       kafka_broker_user: custom-user
       kafka_broker_group: custom-group
+      ssl_enabled: false
+      sasl_protocol: plain
       kafka_broker:
        datadir:
          - /var/lib/kafka/my-data
@@ -43,6 +47,8 @@ all:
       confluent_server_enabled: false
       kafka_connect_user: custom-user
       kafka_connect_group: custom-group
+      ssl_enabled: false
+      sasl_protocol: plain
    
   
  
