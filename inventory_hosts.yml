@@ -22,6 +22,10 @@ all:
     ## For backwards compatibility both will be turned off by default, even if ssl_enabled is set to true
     ## To enable TLS encryption and mTLS authentication uncomment these respectively
     # zookeeper_ssl_enabled: true
+    #### Configuring Multiple Listeners ####
+    ## CP-Ansible will configure two listeners on the broker: an internal listener for the broker to communicate and an external for the components and other clients.
+    ## If you only need one listener uncomment this line:
+    # kafka_broker_configure_additional_brokers: false
  children:
   zookeeper:
     hosts:
