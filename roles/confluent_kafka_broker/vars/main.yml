@@ -20,7 +20,12 @@ kafka_broker_default_group: confluent
 kafka_broker_user: "{{kafka_broker_default_user}}"
 kafka_broker_group: "{{kafka_broker_default_group}}"
 
+kafka_broker_default_interal_replication_factor: "{{ [ groups['kafka_broker'] | length, 3 ] | min }}"
+
+
 kafka_broker:
+   datadir:
+    - /var/lib/kafka/data
   appender_log_path: /var/log/kafka/ 
   appender_log_path: /var/log/kafka/
   kafka_appender_log_name: server.log
@@ -47,8 +52,6 @@ kafka_broker:
   config_file: /etc/kafka/server.properties
   systemd_file: /usr/lib/systemd/system/{{kafka_broker_service_name}}.service
   systemd_override: /etc/systemd/system/{{kafka_broker_service_name}}.service.d/override.conf
-  datadir:
-    - /var/lib/kafka/data
   properties:
     log.retention.check.interval.ms: 300000
     group.initial.rebalance.delay.ms: 3000
