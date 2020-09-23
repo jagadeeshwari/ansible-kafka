@@ -1,38 +1,42 @@
 ---
 all:
  vars:
+    ansible_connection: ssh
+    ansible_user: ec2-user
+    ansible_become: true
+    confluent_server_enabled: false
     #### TLS Configuration ####
     ## By default, data will NOT be encrypted. To turn on TLS encryption, uncomment this line
-    ssl_enabled: false
-       ## For SASL/PLAIN uncomment this line:
-    sasl_protocol: plain
+    ssl_enabled: true
+    ##Custom Keystores and Truststores
+    ## CP-Ansible can move keystores/truststores to their corresponding hosts and configure the components to use them. Set These vars
+    # ssl_provided_keystore_and_truststore: true
+    # ssl_keystore_filepath: "/tmp/certs/{{inventory_hostname}}-keystore.jks"
+    # ssl_keystore_key_password: mystorepassword
+    # ssl_keystore_store_password: mystorepassword
+    # ssl_truststore_filepath: "/tmp/certs/truststore.jks"
+    # ssl_truststore_password: truststorepass
+    # ssl_truststore_ca_cert_alias: <alias to the ca certificate in the truststore eg. CARoot>
+    #### Zookeeper TLS Configuration ####
+    ## Zookeeper can also have TLS Encryption and mTLS Authentication
+    ## For backwards compatibility both will be turned off by default, even if ssl_enabled is set to true
+    ## To enable TLS encryption and mTLS authentication uncomment these respectively
+    # zookeeper_ssl_enabled: true
  children:
   zookeeper:
     hosts:
      ip-172-31-38-8.us-east-2.compute.internal:
      
     vars:
-      ansible_connection: ssh
-      ansible_user: ec2-user
-      ansible_become: true
-      confluent_server_enabled: false
       zookeeper_user: custom-user
       zookeeper_group: custom-group
-      ssl_enabled: false
-      sasl_protocol: plain
   kafka_broker:
      hosts:
       ip-172-31-38-8.us-east-2.compute.internal:
       
      vars:
-      ansible_connection: ssh
-      ansible_user: ec2-user
-      ansible_become: true
-      confluent_server_enabled: false
       kafka_broker_user: custom-user
       kafka_broker_group: custom-group
-      ssl_enabled: false
-      sasl_protocol: plain
       kafka_broker:
        datadir:
          - /var/lib/kafka/my-data
@@ -41,14 +45,9 @@ all:
       ip-172-31-38-8.us-east-2.compute.internal:
       
      vars:
-      ansible_connection: ssh
-      ansible_user: ec2-user
-      ansible_become: true
-      confluent_server_enabled: false
       kafka_connect_user: custom-user
       kafka_connect_group: custom-group
-      ssl_enabled: false
-      sasl_protocol: plain
+      
    
   
  
