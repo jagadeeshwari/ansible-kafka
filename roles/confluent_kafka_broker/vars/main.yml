@@ -24,7 +24,7 @@ kafka_broker_default_interal_replication_factor: "{{ [ groups['kafka_broker'] | 
 
 
 kafka_broker:
-   datadir:
+  datadir:
     - /var/lib/kafka/data
   appender_log_path: /var/log/kafka/ 
   appender_log_path: /var/log/kafka/
