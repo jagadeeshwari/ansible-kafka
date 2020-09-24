@@ -7,8 +7,5 @@ broker.id={{ broker_id | default(groups.kafka_broker.index(inventory_hostname) +
 {{key}}={{value}}
 {% endfor %}
 
-{% if fips_enabled|bool %}
-enable.fips=true
-security.providers=io.confluent.kafka.security.fips.provider.BcFipsProviderCreator,io.confluent.kafka.security.fips.provider.BcFipsJsseProviderCreator
-{% endif %}
+
 
