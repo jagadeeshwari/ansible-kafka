@@ -29,14 +29,14 @@ all:
  children:
   zookeeper:
     hosts:
-     ip-172-31-17-41.us-east-2.compute.internal:
+     ip-172-31-39-155.us-east-2.compute.internal:
      
     vars:
       zookeeper_user: custom-user
       zookeeper_group: custom-group
   kafka_broker:
      hosts:
-      ip-172-31-17-41.us-east-2.compute.internal:
+      ip-172-31-39-155.us-east-2.compute.internal:
       
      vars:
       kafka_broker_user: custom-user
@@ -46,7 +46,7 @@ all:
          - /var/lib/kafka/my-data
   kafka_connect:
      hosts:
-      ip-172-31-17-41.us-east-2.compute.internal:
+      ip-172-31-39-155.us-east-2.compute.internal:
       
      vars:
       kafka_connect_user: custom-user
