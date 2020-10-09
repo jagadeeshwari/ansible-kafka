@@ -24,6 +24,7 @@ kafka_broker:
   config_file: /etc/kafka/server.properties
   systemd_file: /usr/lib/systemd/system/{{kafka_broker_service_name}}.service
   systemd_override: /etc/systemd/system/{{kafka_broker_service_name}}.service.d/override.conf
+kafka_broker_properties:
   defaults:
     enabled: true
     properties:
@@ -57,7 +58,7 @@ kafka_broker:
       inter.broker.listener.name: "{{kafka_broker_listeners[kafka_broker_inter_broker_listener_name]['name']}}"
       kafka.rest.enable: "{{kafka_broker_rest_proxy_enabled|string|lower}}"
   
-
+kafka_broker_final_properties: "{{ kafka_broker_properties }}" 
 zookeeper:
   config_file: /etc/kafka/zookeeper.properties
   systemd_file: /usr/lib/systemd/system/{{zookeeper_service_name}}.service
