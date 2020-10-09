@@ -59,6 +59,8 @@ kafka_broker_properties:
       kafka.rest.enable: "{{kafka_broker_rest_proxy_enabled|string|lower}}"
   
 kafka_broker_final_properties: "{{ kafka_broker_properties }}" 
+kafka_broker_default_internal_replication_factor: "{{ [ groups['kafka_broker'] | default(['localhost']) | length, 3 ] | min }}"
+
 zookeeper:
   config_file: /etc/kafka/zookeeper.properties
   systemd_file: /usr/lib/systemd/system/{{zookeeper_service_name}}.service
