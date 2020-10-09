@@ -61,7 +61,9 @@ kafka_broker_properties:
 kafka_broker_final_properties: "{{ kafka_broker_properties }}" 
 kafka_broker_default_internal_replication_factor: "{{ [ groups['kafka_broker'] | default(['localhost']) | length, 3 ] | min }}"
 zookeeper_client_port: "{{'2182' if zookeeper_ssl_enabled|bool else '2181'}}"
-
+### Boolean to configure components with TLS Encryption. Also manages Java Keystore creation
+ssl_enabled: false
+zookeeper_ssl_enabled: "{{ssl_enabled}}"
 zookeeper:
   config_file: /etc/kafka/zookeeper.properties
   systemd_file: /usr/lib/systemd/system/{{zookeeper_service_name}}.service
