@@ -60,6 +60,7 @@ kafka_broker_properties:
   
 kafka_broker_final_properties: "{{ kafka_broker_properties }}" 
 kafka_broker_default_internal_replication_factor: "{{ [ groups['kafka_broker'] | default(['localhost']) | length, 3 ] | min }}"
+zookeeper_client_port: "{{'2182' if zookeeper_ssl_enabled|bool else '2181'}}"
 
 zookeeper:
   config_file: /etc/kafka/zookeeper.properties
