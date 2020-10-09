@@ -63,7 +63,20 @@ kafka_broker_default_internal_replication_factor: "{{ [ groups['kafka_broker'] |
 zookeeper_client_port: "{{'2182' if zookeeper_ssl_enabled|bool else '2181'}}"
 ### Boolean to configure components with TLS Encryption. Also manages Java Keystore creation
 ssl_enabled: false
+ssl_mutual_auth_enabled: false
+rbac_enabled: false
+sasl_protocol: none
 zookeeper_ssl_enabled: "{{ssl_enabled}}"
+kafka_broker_listeners: "{{ kafka_broker_default_listeners }}"
+
+kafka_broker_default_listeners:
+  internal:
+    name: INTERNAL
+    port: 9092
+    ssl_enabled: "{{ ssl_enabled }}"
+    ssl_mutual_auth_enabled: "{{ ssl_mutual_auth_enabled }}"
+    sasl_protocol: "{{ 'OAUTH' if rbac_enabled|bool else sasl_protocol }}"
+    
 zookeeper:
   config_file: /etc/kafka/zookeeper.properties
   systemd_file: /usr/lib/systemd/system/{{zookeeper_service_name}}.service
