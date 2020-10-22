@@ -1,0 +1,26 @@
+- name: Install Java
+  yum:
+    name: "{{redhat_java_package_name}}"
+    state: present
+
+- name: Install OpenSSL
+  yum:
+    name: "{{item}}"
+  loop:
+    - openssl
+    - unzip
+    
+- name: Create Confluent Platform install directory
+  file:
+    path: "{{archive_destination_path}}"
+    state: directory
+    mode: 0755
+    
+- name: Expand remote Confluent Platform archive
+  unarchive:
+    src: "{{ confluent_archive_file_source }}"
+    remote_src: "{{ confluent_archive_file_remote }}"
+    dest: "{{archive_destination_path}}"
+    mode: 0755
+    creates: "{{archive_destination_path}}/confluent-{{confluent_package_version}}"
+    
