@@ -13,7 +13,7 @@ kafka_broker_properties:
       num.partitions: 1
       num.recovery.threads.per.data.dir: 2
    broker_id:
-     enabled: true
+     enabled: 0
      properties:
        broker.id: 1
 
