@@ -1,5 +1,5 @@
 ---
-kafka_broker_final_properties: "{{ kafka_broker_properties}}"
+kafka_broker_final_properties: "{{kafka_broker_properties | combine_properties}}"
 kafka_broker_properties:
   defaults:
     enabled: true
@@ -12,4 +12,7 @@ kafka_broker_properties:
       num.network.threads: 8
       num.partitions: 1
       num.recovery.threads.per.data.dir: 2
+   broker_id:
+      properties:
+        broker.id: 1
 
