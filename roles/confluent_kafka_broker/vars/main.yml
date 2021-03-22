@@ -13,6 +13,6 @@ kafka_broker_properties:
       num.partitions: 1
       num.recovery.threads.per.data.dir: 2
    broker_id:
-      properties:
-        broker.id: 1
+     properties:
+       broker.id: 1
 
