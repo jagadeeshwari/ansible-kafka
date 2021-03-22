@@ -18,10 +18,10 @@
        dest: "/opt/confluent/test"
        remote_src: "yes"
        
-- name: Kafka Broker Provisioning
-  hosts: kafka_broker
-  tags: kafka_broker
-  tasks:
-  - import_role:
-      name: confluent_kafka_broker
+ - name: Kafka Broker Provisioning
+   hosts: kafka_broker
+   tags: kafka_broker
+   tasks:
+   - import_role:
+       name: confluent_kafka_broker
 
