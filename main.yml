@@ -20,14 +20,79 @@
        dest: "/opt/confluent/test"
        remote_src: "yes"
        
+   - file:
+      path: "/opt/confluent/test/config/properties"
+      state: directory
+      mode: "0755"
+       
  - name: Kafka Broker Provisioning
    hosts: kafka_broker
    vars:
-     Deploy_kafka: zookeeper
-   tags: kafka_broker
+     Deploy_kafka: broker
    tasks:
    - import_role:
        name: confluent_kafka_broker
      when: ( Deploy_Kafka == "all" ) or
           ( Deploy_kafka == "broker" )
 
+- name: Kafka zookeeper Provisioning
+   hosts: kafka_zookeeper
+   vars:
+     Deploy_kafka: zookeeper
+   tasks:
+   - import_role:
+       name: confluent_kafka_zookeeper
+     when: ( Deploy_Kafka == "all" ) or
+          ( Deploy_kafka == "zookeeper" )
+          
+ - name: Kafka schema_registry Provisioning
+   hosts: kafka_schema_registry
+   vars:
+     Deploy_kafka: schema_registry
+   tasks:
+   - import_role:
+       name: confluent_schema_registry
+     when: ( Deploy_Kafka == "all" ) or
+          ( Deploy_kafka == "schema_registry" )
+          
+ - name: Kafka connect Provisioning
+   hosts: kafka_connect
+   vars:
+      Deploy_kafka: connect
+   tasks:
+   - import_role:
+       name: confluent_kafka_connect
+     when: ( Deploy_Kafka == "all" ) or
+          ( Deploy_kafka == "connect" )
+          
+ - name: Kafka control_center Provisioning
+   hosts: kafka_control_center
+   vars:
+     Deploy_kafka: control_center
+   tasks:
+   - import_role:
+       name: confluent_control_center
+     when: ( Deploy_Kafka == "all" ) or
+          ( Deploy_kafka == "control_center" )
+          
+  - name: Kafka ksql Provisioning
+    hosts: kafka_ksql
+    vars:
+     Deploy_kafka: ksql
+    tasks:
+    - import_role:
+       name: confluent_ksql
+      when: ( Deploy_Kafka == "all" ) or
+          ( Deploy_kafka == "ksql" )
+          
+  - name: Kafka connect_replicator Provisioning
+    hosts: kafka_connect_replicator
+    vars:
+     Deploy_kafka: connect_replicator
+    tasks:
+    - import_role:
+       name: confluent_connect_replicator
+      when: ( Deploy_Kafka == "all" ) or
+          ( Deploy_kafka == "connect_replicator" )
+          
+   
