@@ -1,5 +1,7 @@
 ---
 all:
+  vars:
+    Deploy_Kafka: broker
  children:
   zookeeper:
     hosts:
