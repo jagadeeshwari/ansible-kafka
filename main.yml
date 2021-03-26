@@ -24,4 +24,6 @@
    tasks:
    - import_role:
        name: confluent_kafka_broker
+   when: ( Deploy_Kafka == "all" ) or
+          ( Deploy_kafka == "broker" )
 
