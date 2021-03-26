@@ -35,9 +35,9 @@
      when: ( Deploy_Kafka == "all" ) or
           ( Deploy_kafka == "broker" )
 
-- name: Kafka zookeeper Provisioning
-  hosts: kafka_zookeeper
-  vars:
+ - name: Kafka zookeeper Provisioning
+   hosts: kafka_zookeeper
+   vars:
     Deploy_kafka: zookeeper
    tasks:
    - import_role:
@@ -75,24 +75,24 @@
      when: ( Deploy_Kafka == "all" ) or
           ( Deploy_kafka == "control_center" )
           
-  - name: Kafka ksql Provisioning
-    hosts: kafka_ksql
-    vars:
+ - name: Kafka ksql Provisioning
+   hosts: kafka_ksql
+   vars:
      Deploy_kafka: ksql
-    tasks:
-    - import_role:
-       name: confluent_ksql
-      when: ( Deploy_Kafka == "all" ) or
+   tasks:
+   - import_role:
+      name: confluent_ksql
+     when: ( Deploy_Kafka == "all" ) or
           ( Deploy_kafka == "ksql" )
           
-  - name: Kafka connect_replicator Provisioning
-    hosts: kafka_connect_replicator
-    vars:
+ - name: Kafka connect_replicator Provisioning
+   hosts: kafka_connect_replicator
+   vars:
      Deploy_kafka: connect_replicator
-    tasks:
-    - import_role:
+   tasks:
+   - import_role:
        name: confluent_connect_replicator
-      when: ( Deploy_Kafka == "all" ) or
+     when: ( Deploy_Kafka == "all" ) or
           ( Deploy_kafka == "connect_replicator" )
           
    
