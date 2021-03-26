@@ -1,5 +1,5 @@
 ---
-broker_config_directory: "{{ installation_base_path }}"/config/properties
+broker_config_directory: "{{installation_base_path}}/config/properties"
 
 kafka_broker_final_properties: "{{kafka_broker_properties }}"
 kafka_broker_properties:
