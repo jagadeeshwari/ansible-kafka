@@ -4,7 +4,7 @@
    gather_facts: true
    become: true
    vars:
-     Deploy_kafka: broker
+     Deploy_kafka: zookeeper
    tasks:
    - file:
        path: "/opt/confluent/test"
@@ -23,7 +23,7 @@
  - name: Kafka Broker Provisioning
    hosts: kafka_broker
    vars:
-     Deploy_kafka: broker
+     Deploy_kafka: zookeeper
    tags: kafka_broker
    tasks:
    - import_role:
