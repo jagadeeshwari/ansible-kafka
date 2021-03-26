@@ -38,7 +38,7 @@
  - name: Kafka zookeeper Provisioning
    hosts: kafka_zookeeper
    vars:
-    Deploy_kafka: zookeeper
+    Deploy_kafka: broker
    tasks:
    - import_role:
        name: confluent_kafka_zookeeper
@@ -48,7 +48,7 @@
  - name: Kafka schema_registry Provisioning
    hosts: kafka_schema_registry
    vars:
-     Deploy_kafka: schema_registry
+     Deploy_kafka: broker
    tasks:
    - import_role:
        name: confluent_schema_registry
@@ -58,7 +58,7 @@
  - name: Kafka connect Provisioning
    hosts: kafka_connect
    vars:
-      Deploy_kafka: connect
+      Deploy_kafka: broker
    tasks:
    - import_role:
        name: confluent_kafka_connect
@@ -68,7 +68,7 @@
  - name: Kafka control_center Provisioning
    hosts: kafka_control_center
    vars:
-     Deploy_kafka: control_center
+     Deploy_kafka: broker
    tasks:
    - import_role:
        name: confluent_control_center
@@ -78,7 +78,7 @@
  - name: Kafka ksql Provisioning
    hosts: kafka_ksql
    vars:
-     Deploy_kafka: ksql
+     Deploy_kafka: broker
    tasks:
    - import_role:
       name: confluent_ksql
@@ -88,7 +88,7 @@
  - name: Kafka connect_replicator Provisioning
    hosts: kafka_connect_replicator
    vars:
-     Deploy_kafka: connect_replicator
+     Deploy_kafka: broker
    tasks:
    - import_role:
        name: confluent_connect_replicator
