@@ -23,7 +23,7 @@
  - name: Kafka Broker Provisioning
    hosts: kafka_broker
    vars:
-     Deploy_kafka == broker
+     Deploy_kafka: broker
    tags: kafka_broker
    tasks:
    - import_role:
