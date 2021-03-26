@@ -41,18 +41,10 @@
     Deploy_kafka: broker
    tasks:
    - import_role:
-       name: confluent_kafka_zookeeper
+       name: confluent_zookeeper
      when: ( Deploy_Kafka == "all" ) or
           ( Deploy_kafka == "zookeeper" )
           
- - name: Kafka schema_registry Provisioning
-   hosts: kafka_broker
-   vars:
-     Deploy_kafka: broker
-   tasks:
-   - import_role:
-       name: confluent_schema_registry
-     when: ( Deploy_Kafka == "all" ) or
-          ( Deploy_kafka == "schema_registry" )
+
           
  
