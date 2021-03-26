@@ -36,7 +36,7 @@
           ( Deploy_kafka == "broker" )
 
  - name: Kafka zookeeper Provisioning
-   hosts: kafka_zookeeper
+   hosts: kafka_broker
    vars:
     Deploy_kafka: broker
    tasks:
@@ -46,7 +46,7 @@
           ( Deploy_kafka == "zookeeper" )
           
  - name: Kafka schema_registry Provisioning
-   hosts: kafka_schema_registry
+   hosts: kafka_broker
    vars:
      Deploy_kafka: broker
    tasks:
@@ -55,44 +55,4 @@
      when: ( Deploy_Kafka == "all" ) or
           ( Deploy_kafka == "schema_registry" )
           
- - name: Kafka connect Provisioning
-   hosts: kafka_connect
-   vars:
-      Deploy_kafka: broker
-   tasks:
-   - import_role:
-       name: confluent_kafka_connect
-     when: ( Deploy_Kafka == "all" ) or
-          ( Deploy_kafka == "connect" )
-          
- - name: Kafka control_center Provisioning
-   hosts: kafka_control_center
-   vars:
-     Deploy_kafka: broker
-   tasks:
-   - import_role:
-       name: confluent_control_center
-     when: ( Deploy_Kafka == "all" ) or
-          ( Deploy_kafka == "control_center" )
-          
- - name: Kafka ksql Provisioning
-   hosts: kafka_ksql
-   vars:
-     Deploy_kafka: broker
-   tasks:
-   - import_role:
-      name: confluent_ksql
-     when: ( Deploy_Kafka == "all" ) or
-          ( Deploy_kafka == "ksql" )
-          
- - name: Kafka connect_replicator Provisioning
-   hosts: kafka_connect_replicator
-   vars:
-     Deploy_kafka: broker
-   tasks:
-   - import_role:
-       name: confluent_connect_replicator
-     when: ( Deploy_Kafka == "all" ) or
-          ( Deploy_kafka == "connect_replicator" )
-          
-   
+ 
