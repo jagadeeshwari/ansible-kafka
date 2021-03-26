@@ -3,6 +3,8 @@
    hosts: all
    gather_facts: true
    become: true
+   vars:
+     Deploy_kafka: broker
    tasks:
    - file:
        path: "/opt/confluent/test"
@@ -24,6 +26,6 @@
    tasks:
    - import_role:
        name: confluent_kafka_broker
-   when: ( Deploy_Kafka == "all" ) or
+     when: ( Deploy_Kafka == "all" ) or
           ( Deploy_kafka == "broker" )
 
