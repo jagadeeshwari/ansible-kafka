@@ -3,3 +3,17 @@
 {% for key, value in kafka_broker_final_properties|dictsort%}
 {{key}}={{value}}
 {% endfor %}
+confluent.security.event.router.config=\
+{ \
+    "destinations": { \
+        "bootstrap_servers": ["audit.example.com:9092"], \
+        "topics": { \
+            "confluent-audit-log-events": { \
+                "retention_ms": 7776000000
+            } \
+        } \
+    }, \
+    "default_topics": { \
+        "allowed": "confluent-audit-log-events", \
+        "denied": "confluent-audit-log-events" \
+    } \
