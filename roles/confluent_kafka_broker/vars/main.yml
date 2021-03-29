@@ -2,19 +2,7 @@
 installation_base_path: "/opt/confluent/test"
 broker_config_directory: "{{installation_base_path}}/config/properties"
 
-kafka_broker_final_properties: "{{kafka_broker_properties }}"
-kafka_broker_properties:
-      group.initial.rebalance.delay.ms: 3000
-      log.retention.check.interval.ms: 300000
-      log.retention.hours: 168
-      log.segment.bytes: 1073741824
-      num.io.threads: 16
-      num.network.threads: 8
-      num.partitions: 1
-      num.recovery.threads.per.data.dir: 2
-      broker.id: 1
-      ##LDAP settings
-      ldap.authorizer.java.naming.security.principal: CN:Type S\\, EAH URTABTKW,OU=Service Accounts,OU=NOC Admin,OU=Accounts,OU=BAND
-      ldap.group.member.attribute.pattern: CN=(.*),OU=rbac,DC=example,DC=com
-      ldap.java.naming.provider.url: ldap://ldap1:389
+#kafka_broker_final_properties: "{{kafka_broker_properties }}"
+#kafka_broker_properties:
+
 
