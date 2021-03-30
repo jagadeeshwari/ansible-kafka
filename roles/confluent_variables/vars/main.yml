@@ -1,3 +1,5 @@
 ---
+confluent_kafka_version: 5.5.1-2.12
+confluent_kafka_package: confluent-{{confluent_kafka_version}}.tar.gz
 installation_base_path: "/opt/confluent/test"
 broker_config_directory: "{{installation_base_path}}/config/properties"
