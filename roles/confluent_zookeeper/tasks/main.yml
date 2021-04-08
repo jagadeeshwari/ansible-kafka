@@ -1,52 +1,14 @@
-- name: Install the Zookeeper Packages
-  yum:
-    name: "{{item}}{{confluent_package_redhat_suffix}}"
-    state: latest
-  loop: "{{zookeeper_packages}}"
-  
-- name: Create Zookeeper Group
-  group:
-    name: "{{zookeeper_group}}"
-
-- name: Create Zookeeper User
-  user:
-    name: "{{zookeeper_user}}"
-    comment: "Zookeeper User"
-    system: true
-    group: "{{zookeeper_group}}"
-
-- name: Set Zookeeper dataDir ownership
-  file:
-    path: "{{zookeeper.properties.dataDir}}"
-    owner: "{{zookeeper_user}}"
-    group: "{{zookeeper_group}}"
-    state: directory
-    mode: 0750
-
-- name: Set Ownership of Data Dir files
-  file:
-    path: "{{zookeeper.properties.dataDir}}"
-    owner: "{{zookeeper_user}}"
-    group: "{{zookeeper_group}}"
-    recurse: true
+---
+ - include_role:
+    name: confluent_common
  
-- name: Create Log Directory
-  file:
-    path: "{{zookeeper.log_path}}"
-    state: directory
-    group: "{{zookeeper_group}}"
-    owner: "{{zookeeper_user}}"
-    mode: 0750
-  
-- name: Zookeeper Service Started
-  systemd:
-    name: "{{zookeeper_service_name}}"
-    enabled: true
-    state: started
-- name: Create Service Override Directory
-  file:
-    path: "{{zookeeper.systemd_override | dirname}}"
-    owner: "{{zookeeper_user}}"
-    group: "{{zookeeper_group}}"
-    state: directory
-    mode: 0640
+ - name: create config folder 
+   file:
+     path: "{{ zookeeper_config_directory }}"
+     state: directory
+     mode: "0755"
+     
+ - name: Create Broker config
+   template:
+      src: server.properties.j2
+      dest: "{{ broker_config_directory }}/zookeeper.properties"
