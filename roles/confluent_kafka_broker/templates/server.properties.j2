@@ -1,5 +1,6 @@
 # Maintained by Ansible
 {# kafka_broker_final_properties defined in the confluent.variables role #}
+zookeeper.connect= "{{ groups['kafka_zookeeper'] | default(['localhost']) | join(':' + zookeeper_client_port|string + ',') }}:{{zookeeper_client_port}}"
 group.initial.rebalance.delay.ms=3000
 log.retention.check.interval.ms=300000
 log.retention.hours=168
