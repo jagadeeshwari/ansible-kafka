@@ -4,7 +4,7 @@
  
  - name: create config folder 
    file:
-     path: "{{ zookeeper_config_directory }}"
+     path: "{{ broker_config_directory }}"
      state: directory
      mode: "0755"
      
