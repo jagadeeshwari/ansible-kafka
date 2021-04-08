@@ -10,7 +10,7 @@
           ( Deploy_kafka == "broker" )
 
  - name: Kafka zookeeper Provisioning
-   hosts: kafka_broker
+   hosts: kafka_zookeeper
    vars:
     Deploy_kafka: broker
    tasks:
