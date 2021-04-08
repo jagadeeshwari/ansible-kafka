@@ -3,4 +3,4 @@ confluent_kafka_version: 5.5.1-2.12
 confluent_kafka_package: confluent-{{confluent_kafka_version}}.tar.gz
 broker_config_directory: "{{installation_base_path}}/config/properties"
 installation_base_path: "/opt/confluent/test"
-zookeeper_client_port: 2182
+broker_client_port: 2182
