@@ -16,6 +16,7 @@ all:
   kafka_broker:
      hosts:
       ip-172-31-19-145.us-east-2.compute.internal:
+      ip-172-31-12-53.us-east-2.compute.internal:
      vars:
       ansible_connection: ssh
       ansible_user: ec2-user
