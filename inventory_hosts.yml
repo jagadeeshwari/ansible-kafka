@@ -4,7 +4,7 @@ all:
    ansible_connection: ssh
    ansible_user: ec2-user
  children:
-  zookeeper:
+  kafka_zookeeper:
     hosts:
      ip-172-31-19-145.us-east-2.compute.internal:
     vars:
@@ -28,7 +28,8 @@ all:
       kafka_broker:
        datadir:
          - /var/lib/kafka/my-data
-     ip-172-31-12-53.us-east-2.compute.internal:
+         
+      ip-172-31-12-53.us-east-2.compute.internal:
      vars:
       ansible_connection: ssh
       ansible_user: ec2-user
